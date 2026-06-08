@@ -18,12 +18,12 @@ class Console:
     level: str
 
 @dataclass
-class Logger:
+class LoggerConfig:
     file: LoggerFile
     console: Console
 
 @dataclass
-class DBMeta:
+class DBConfig:
     host: str
     port: int
     user: str
@@ -31,46 +31,38 @@ class DBMeta:
     database: str
 
 @dataclass
-class DBDw:
-    host: str
-    port: int
-    user: str
-    password: str
-    database: str
-
-@dataclass
-class QDrant:
+class QDrantConfig:
     host: str
     port: int
     embedding_size: int
 
 @dataclass
-class Embedding:
+class EmbeddingConfig:
     host: str
     port: int
     model: str
 
 @dataclass
-class ES:
+class ESConfig:
     host: str
     port: int
     index_name: str
 
 @dataclass
-class LLM:
+class LLMConfig:
     model_name: str
     api_key: str
     base_url: str
 
 @dataclass
 class AppConf:
-    logging: Logger
-    db_meta: DBMeta
-    db_dw: DBDw
-    qdrant: QDrant
-    embedding: Embedding
-    es: ES
-    llm: LLM
+    logging: LoggerConfig
+    db_meta: DBConfig
+    db_dw: DBConfig
+    qdrant: QDrantConfig
+    embedding: EmbeddingConfig
+    es: ESConfig
+    llm: LLMConfig
 
 # Path(__file__)获取当前文件所在目录（不是工作目录）
 #path = Path(__file__).parents[2]/"conf/app_config.yaml"

@@ -15,7 +15,7 @@ class MysqlClient:
 
     def get_url(self) -> str:
         # DATABASE_URL = "mysql+asyncmy://user:password@localhost:3306/mydb?charset=utf8mb4"
-        return f"mysql+asyncmy://{self.dbConfig.user}:{self.dbConfig.password}+@{self.dbConfig.host}:{self.dbConfig.port}/{self.dbConfig.database}?charset=utf8mb4"
+        return f"mysql+asyncmy://{self.dbConfig.user}:{self.dbConfig.password}@{self.dbConfig.host}:{self.dbConfig.port}/{self.dbConfig.database}?charset=utf8mb4"
 
     def init(self):
         # 1. 创建异步引擎
@@ -46,10 +46,11 @@ dw_mysql_client = MysqlClient(app_config.db_dw)
 meta_mysql_client = MysqlClient(app_config.db_meta)
 
 if __name__ == '__main__':
-    dw_mysql_client.init()
+    print(meta_mysql_client.get_url())
+    meta_mysql_client.init()
 
     async def test():
-        async with dw_mysql_client.session_factory() as session:
+        async with meta_mysql_client.session_factory() as session:
             result = await session.execute(text("select * from table_info"))
             rows = result.fetchall()
             print(rows)
